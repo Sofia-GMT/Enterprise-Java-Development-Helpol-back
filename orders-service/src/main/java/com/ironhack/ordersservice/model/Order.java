@@ -2,14 +2,13 @@ package com.ironhack.ordersservice.model;
 
 import com.ironhack.ordersservice.enums.Status;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name="orders")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,14 +19,17 @@ public class Order {
 
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+    public Order(){}
 
     public Order(Integer userId, Integer primersId, BigDecimal price) {
         this.userId = userId;
         this.primersId = primersId;
         this.price = price;
         this.status=Status.PROCESSED;
-        // by default, each time an order is created the status is "procesed"
+        // by default, each time an order is created the status is "processed"
         // and only changes to delivered when the scientist receives the primers
     }
 

@@ -7,5 +7,5 @@ public interface OrderService {
 
     void delete(Integer id);
 
-    void updateStatusToDelivered(Integer id);
+    void updateStatus(Integer id, String status);
 }

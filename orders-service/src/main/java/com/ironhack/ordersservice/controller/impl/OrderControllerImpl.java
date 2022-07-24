@@ -45,7 +45,8 @@ public class OrderControllerImpl implements OrderController {
 
     @PatchMapping("/orders/{id}/status") // Update status to Delivered
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateStatus(@PathVariable Integer id) {
-        orderService.updateStatusToDelivered(id) ;
+    public void updateStatus(@PathVariable Integer id,
+    @RequestBody String status) {
+        orderService.updateStatus(id, status) ;
     }
 }
