@@ -1,16 +1,12 @@
-package com.ironhack.ordersservice.model;
+package com.ironhack.crud.models;
 
-import com.ironhack.ordersservice.enums.StatusOrder;
 
-import javax.persistence.*;
+import com.ironhack.crud.enums.StatusOrder;
+
 import java.math.BigDecimal;
 
-@Entity
-@Table(name="orders")
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private Integer userId;
@@ -19,7 +15,7 @@ public class Order {
 
     private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
+
     private StatusOrder statusOrder;
 
     public Order(){}

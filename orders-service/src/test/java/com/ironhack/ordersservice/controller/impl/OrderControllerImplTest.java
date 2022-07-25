@@ -2,7 +2,7 @@ package com.ironhack.ordersservice.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.ordersservice.controller.dto.StatusDto;
-import com.ironhack.ordersservice.enums.Status;
+import com.ironhack.ordersservice.enums.StatusOrder;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -17,9 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -113,7 +111,7 @@ class OrderControllerImplTest {
                 .andExpect( status().isNoContent() )
                 .andReturn();
 
-        assertEquals(Status.DELIVERED, order1.getStatus());
+        assertEquals( StatusOrder.DELIVERED, order1.getStatus());
     }
 
 }

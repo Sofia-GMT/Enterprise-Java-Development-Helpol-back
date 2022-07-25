@@ -1,7 +1,7 @@
 package com.ironhack.ordersservice.services.impl;
 
 import com.ironhack.ordersservice.controller.dto.StatusDto;
-import com.ironhack.ordersservice.enums.Status;
+import com.ironhack.ordersservice.enums.StatusOrder;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
 import com.ironhack.ordersservice.services.interfaces.OrderService;
@@ -44,21 +44,21 @@ public class OrderServiceImpl implements OrderService {
 
         // We check if the new status is different
 
-        Status newStatus = null;
+        StatusOrder newStatusOrder = null;
         try {
-            newStatus = Status.valueOf( status.getStatus().toUpperCase() );
+            newStatusOrder = StatusOrder.valueOf( status.getStatus().toUpperCase() );
         } catch (IllegalArgumentException e){
-            newStatus = optionalOrder.get().getStatus();
+            newStatusOrder = optionalOrder.get().getStatus();
             // If the string provided cannot be assigned to an Status,
             // the initial status remains the same
         }
 
-        if (newStatus == optionalOrder.get().getStatus()){
+        if (newStatusOrder == optionalOrder.get().getStatus()){
             throw new ResponseStatusException( HttpStatus.UNPROCESSABLE_ENTITY,
                     "The status is "+optionalOrder.get().getStatus());
         }
 
-        optionalOrder.get().setStatus( newStatus );
+        optionalOrder.get().setStatus( newStatusOrder );
         orderRepository.save( optionalOrder.get() );
 
     }

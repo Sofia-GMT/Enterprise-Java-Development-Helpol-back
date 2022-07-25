@@ -1,5 +1,5 @@
 package com.ironhack.ordersservice.enums;
 
-public enum Status {
+public enum StatusOrder {
     DELIVERED, PROCESSED, SENT;
 }
