@@ -1,5 +1,6 @@
 package com.ironhack.ordersservice.services.impl;
 
+import com.ironhack.ordersservice.controller.dto.StatusDto;
 import com.ironhack.ordersservice.enums.Status;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
@@ -35,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    public void updateStatus(Integer id, String status) {
+    public void updateStatus(Integer id, StatusDto status) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (!optionalOrder.isPresent()) {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Order not found");
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 
         Status newStatus = null;
         try {
-            newStatus = Status.valueOf( status.toUpperCase() );
+            newStatus = Status.valueOf( status.getStatus().toUpperCase() );
         } catch (IllegalArgumentException e){
             newStatus = optionalOrder.get().getStatus();
             // If the string provided cannot be assigned to an Status,

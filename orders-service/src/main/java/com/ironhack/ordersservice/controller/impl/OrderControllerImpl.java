@@ -1,6 +1,8 @@
 package com.ironhack.ordersservice.controller.impl;
 
+import com.ironhack.ordersservice.controller.dto.StatusDto;
 import com.ironhack.ordersservice.controller.interfaces.OrderController;
+import com.ironhack.ordersservice.enums.Status;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
 import com.ironhack.ordersservice.services.interfaces.OrderService;
@@ -34,6 +36,7 @@ public class OrderControllerImpl implements OrderController {
     @PostMapping("/orders") // Create new orders
     @ResponseStatus(HttpStatus.CREATED)
     public Order store(@RequestBody Order order) {
+        order.setStatus( Status.PROCESSED );
         return orderRepository.save(order);
     }
 
@@ -46,7 +49,7 @@ public class OrderControllerImpl implements OrderController {
     @PatchMapping("/orders/{id}/status") // Update status to Delivered
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateStatus(@PathVariable Integer id,
-    @RequestBody String status) {
+    @RequestBody StatusDto status) {
         orderService.updateStatus(id, status) ;
     }
 }

@@ -1,15 +1,14 @@
-package com.ironhack.ordersservice.controller.impl;
+package com.ironhack.userservice.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironhack.ordersservice.controller.dto.StatusDto;
-import com.ironhack.ordersservice.enums.Status;
-import com.ironhack.ordersservice.model.Order;
-import com.ironhack.ordersservice.repository.OrderRepository;
+import com.ironhack.userservice.controller.dto.StatusDto;
+import com.ironhack.userservice.enums.Status;
+import com.ironhack.userservice.model.User;
+import com.ironhack.userservice.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -17,67 +16,73 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.math.BigDecimal;
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class OrderControllerImplTest {
+class UserControllerImplTest {
 
     @Autowired
-    private OrderRepository orderRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
-    Order order1, order2;
+    User user1, user2;
 
     @BeforeEach
     void setUp() {
-        order1 = new Order( 1, 1, new BigDecimal( 25 ) );
-        order2 = new Order( 2, 3, new BigDecimal( 30 ) );
-        orderRepository.saveAll( List.of( order1, order2 ) );
+        user1 = new User( "Daniel González", 236 );
+        user2 = new User( "Andrea Jiménez", 562 );
+        userRepository.saveAll( List.of(user1, user2) );
     }
 
     @AfterEach
     void tearDown() {
-        orderRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
     void findAll() throws Exception {
-        MvcResult mvcResult = mockMvc.perform( get( "/orders" ) )
+        MvcResult mvcResult = mockMvc.perform( get( "/users" ) )
                 .andExpect( status().isOk() )
                 .andExpect( content().contentType( MediaType.APPLICATION_JSON ) )
                 .andReturn();
-        assertTrue( mvcResult.getResponse().getContentAsString().contains( "25" ) );
-        assertTrue( mvcResult.getResponse().getContentAsString().contains( "30" ) );
+        assertTrue( mvcResult.getResponse().getContentAsString().contains( "236" ) );
+        assertTrue( mvcResult.getResponse().getContentAsString().contains( "562" ) );
     }
 
     @Test
     void findById() throws Exception {
-        MvcResult mvcResult = mockMvc.perform( get( "/orders/" + order1.getId() ) )
+        MvcResult mvcResult = mockMvc.perform( get( "/users/" + user1.getId() ) )
                 .andExpect( status().isOk() )
                 .andExpect( content().contentType( MediaType.APPLICATION_JSON ) )
                 .andReturn();
-        assertTrue( mvcResult.getResponse().getContentAsString().contains( "25" ) );
-        assertFalse( mvcResult.getResponse().getContentAsString().contains( "30" ) );
+        assertTrue( mvcResult.getResponse().getContentAsString().contains( "236" ) );
+        assertFalse( mvcResult.getResponse().getContentAsString().contains( "562" ) );
     }
 
     @Test
-    void save() throws Exception {
-        Order order3 = new Order( 5, 2, new BigDecimal( 28 ) );
-        String body = objectMapper.writeValueAsString( order3 );
+    void getStatus() throws Exception {
+        MvcResult mvcResult = mockMvc.perform( get( "/users-status/" + user1.getId() ) )
+                .andExpect( status().isOk() )
+                .andExpect( content().contentType( MediaType.APPLICATION_JSON ) )
+                .andReturn();
+        assertTrue( mvcResult.getResponse().getContentAsString().contains("PENDING") );
+    }
+
+    @Test
+    void store() throws Exception {
+        User user3 = new User( "Laura Pérez", 562 );
+        String body = objectMapper.writeValueAsString( user3 );
 
         MvcResult mvcResult = mockMvc.perform(
-                        post( "/orders" )
+                        post( "/users" )
                                 .content( body )
                                 .contentType( MediaType.APPLICATION_JSON )
                 )
@@ -85,35 +90,33 @@ class OrderControllerImplTest {
                 .andExpect( content().contentType( MediaType.APPLICATION_JSON ) )
                 .andReturn();
 
-        assertTrue( mvcResult.getResponse().getContentAsString().contains( "5" ) );
-        assertTrue( mvcResult.getResponse().getContentAsString().contains( "28" ) );
+        assertTrue( mvcResult.getResponse().getContentAsString().contains("Laura") );
+        assertTrue( mvcResult.getResponse().getContentAsString().contains( "562" ) );
     }
 
     @Test
     void remove() throws Exception {
-        MvcResult mvcResult = mockMvc.perform( delete( "/orders/" + order1.getId() ) )
+        MvcResult mvcResult = mockMvc.perform( delete("/users/"+user1.getId()) )
                 .andExpect( status().isNoContent() )
                 .andReturn();
-        assertFalse( orderRepository.existsById( order1.getId() ) );
+        assertFalse( userRepository.existsById( user1.getId() ) );
     }
 
     @Test
-    void updateNewStatus() throws Exception { //AQUÍ NO SALE PERO SÍ EN EL POSTMAN
-
+    void differentStatus() throws Exception{ //AQUÍ NO SALE PERO SÍ EN EL POSTMAN
         StatusDto statusDto = new StatusDto();
-        statusDto.setStatus( "DELIVERED" );
+        statusDto.setStatus( "VALIDATED" );
 
         String body = objectMapper.writeValueAsString( statusDto );
 
         MvcResult mvcResult = mockMvc.perform(
-                        patch( "/orders/" + order1.getId() +"/status" )
+                        patch( "/orders/" + user1.getId() +"/status" )
                                 .content( body )
                                 .contentType( MediaType.APPLICATION_JSON )
                 )
                 .andExpect( status().isNoContent() )
                 .andReturn();
 
-        assertEquals(Status.DELIVERED, order1.getStatus());
+        assertEquals( Status.VALIDATED, user1.getStatus());
     }
-
 }

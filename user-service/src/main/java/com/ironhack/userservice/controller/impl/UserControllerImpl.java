@@ -1,5 +1,6 @@
 package com.ironhack.userservice.controller.impl;
 
+import com.ironhack.userservice.controller.dto.StatusDto;
 import com.ironhack.userservice.controller.interfaces.UserController;
 import com.ironhack.userservice.model.User;
 import com.ironhack.userservice.repository.UserRepository;
@@ -35,8 +36,9 @@ public class UserControllerImpl implements UserController {
     // Check status of the user. Only the validated ones can order primers
     @GetMapping("/users-status/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public String getStatus(@PathVariable Integer id) {
-        return userRepository.findById(id).get().getStatus().toString();
+    public StatusDto getStatus(@PathVariable Integer id) {
+        return userService.getStatusDto(id);
+
     }
 
     @PostMapping("/users") // Create new users
@@ -54,7 +56,7 @@ public class UserControllerImpl implements UserController {
     @PatchMapping("/users/{id}/status") // Update status
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateStatus(@PathVariable Integer id,
-                             @RequestBody String status) {
+                             @RequestBody StatusDto status) {
         userService.updateStatus(id, status);
     }
 

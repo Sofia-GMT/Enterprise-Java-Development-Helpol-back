@@ -25,6 +25,8 @@ public class Primers {
         this.reverseSequence = reverseSequence;
     }
 
+    public Primers(){}
+
     public Integer getId() {
         return id;
     }

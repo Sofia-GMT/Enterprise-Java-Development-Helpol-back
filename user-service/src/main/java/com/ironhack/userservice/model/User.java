@@ -26,6 +26,8 @@ public class User {
         // by default, each time a user is created the status is "pending validation"
     }
 
+    public User(){}
+
     public Integer getId() {
         return id;
     }
