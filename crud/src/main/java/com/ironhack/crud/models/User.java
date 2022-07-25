@@ -1,6 +1,6 @@
 package com.ironhack.crud.models;
 
-import com.ironhack.crud.enums.Status;
+import com.ironhack.crud.enums.StatusUser;
 
 public class User {
 
@@ -10,13 +10,13 @@ public class User {
 
     private Integer IdInstitution;
 
-    private Status status;
+    private StatusUser statusUser;
 
 
     public User(String name, int idInstitution) {
         this.name = name;
         IdInstitution = idInstitution;
-        this.status = Status.PENDING;
+        this.statusUser = StatusUser.PENDING;
         // by default, each time a user is created the status is "pending validation"
     }
 
@@ -46,12 +46,12 @@ public class User {
         IdInstitution = idInstitution;
     }
 
-    public Status getStatus() {
-        return status;
+    public StatusUser getStatus() {
+        return statusUser;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(StatusUser statusUser) {
+        this.statusUser = statusUser;
     }
 
 }

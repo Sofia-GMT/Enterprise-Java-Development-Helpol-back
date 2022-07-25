@@ -1,10 +1,10 @@
 package com.ironhack.ordersservice.controller.dto;
 
-public class StatusDto {
+public class StatusOrderDto {
 
     private String status;
 
-    public StatusDto() {}
+    public StatusOrderDto() {}
 
     public String getStatus() {
         return status;

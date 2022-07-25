@@ -8,6 +8,7 @@ import com.ironhack.crud.models.Order;
 import com.ironhack.crud.models.Primers;
 import com.ironhack.crud.models.User;
 import com.ironhack.crud.service.interfaces.CrudService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 @Service
@@ -29,12 +31,10 @@ public class CrudServiceImpl implements CrudService {
     @Autowired
     private UserServiceClient userServiceClient;
 
-    @Autowired
-    private CrudService crudService;
-
     private final Logger logger = LoggerFactory.getLogger( CrudControllerImpl.class);
 
     @Override
+    @CircuitBreaker(name = "createAnOrderFromInterface", fallbackMethod = "createAnOrderFromInterfaceFallback")
     public Order createAnOrderFromInterface(Integer userId,
                                             Optional<Integer> optionalPrimerId,
                                             Optional<Integer> optionalConcentration,
@@ -74,6 +74,11 @@ public class CrudServiceImpl implements CrudService {
         return order;
     }
 
+    public Order createAnOrderFromInterfaceFallback(Exception e) {
+        logger.error( e.getMessage() );
+        return null;
+    }
+
     public BigDecimal calculatePrice(Optional<Integer> optionalConcentration, Primers primers){
 
         BigDecimal price; // this is what we are going to return
@@ -85,10 +90,13 @@ public class CrudServiceImpl implements CrudService {
             switch (optionalConcentration.get()) {
                 case 25:
                     pricePerNucleotide = new BigDecimal( 0.53 );
+                    break;
                 case 100:
                     pricePerNucleotide = new BigDecimal( 1.05 );
+                    break;
                 case 250:
                     pricePerNucleotide = new BigDecimal( 1.88 );
+                    break;
             }
 
             // we count the total number of nucleotides and then multiply by
@@ -107,7 +115,7 @@ public class CrudServiceImpl implements CrudService {
                     .multiply( BigDecimal.valueOf( 0.53 ) );
         }
 
-        return price;
+        return price.setScale( 2, RoundingMode.HALF_UP );
     }
 
 

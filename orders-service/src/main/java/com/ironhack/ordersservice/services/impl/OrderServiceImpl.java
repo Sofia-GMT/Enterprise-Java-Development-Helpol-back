@@ -1,6 +1,6 @@
 package com.ironhack.ordersservice.services.impl;
 
-import com.ironhack.ordersservice.controller.dto.StatusDto;
+import com.ironhack.ordersservice.controller.dto.StatusOrderDto;
 import com.ironhack.ordersservice.enums.StatusOrder;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
-    public void updateStatus(Integer id, StatusDto status) {
+    public void updateStatus(Integer id, StatusOrderDto status) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if (!optionalOrder.isPresent()) {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Order not found");

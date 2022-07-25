@@ -1,7 +1,7 @@
 package com.ironhack.ordersservice.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ironhack.ordersservice.controller.dto.StatusDto;
+import com.ironhack.ordersservice.controller.dto.StatusOrderDto;
 import com.ironhack.ordersservice.enums.StatusOrder;
 import com.ironhack.ordersservice.model.Order;
 import com.ironhack.ordersservice.repository.OrderRepository;
@@ -98,10 +98,10 @@ class OrderControllerImplTest {
     @Test
     void updateNewStatus() throws Exception { //AQUÍ NO SALE PERO SÍ EN EL POSTMAN
 
-        StatusDto statusDto = new StatusDto();
-        statusDto.setStatus( "DELIVERED" );
+        StatusOrderDto statusOrderDto = new StatusOrderDto();
+        statusOrderDto.setStatus( "DELIVERED" );
 
-        String body = objectMapper.writeValueAsString( statusDto );
+        String body = objectMapper.writeValueAsString( statusOrderDto );
 
         MvcResult mvcResult = mockMvc.perform(
                         patch( "/orders/" + order1.getId() +"/status" )

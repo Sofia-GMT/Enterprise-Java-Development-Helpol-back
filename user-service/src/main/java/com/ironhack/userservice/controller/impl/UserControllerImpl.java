@@ -55,7 +55,7 @@ public class UserControllerImpl implements UserController {
 
     @PatchMapping("/users/{id}/status") // Update status
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateStatus(@PathVariable Integer id,
+    public void updateStatusUser(@PathVariable Integer id,
                              @RequestBody StatusDto status) {
         userService.updateStatus(id, status);
     }

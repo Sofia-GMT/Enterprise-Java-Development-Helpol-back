@@ -1,5 +1,5 @@
 package com.ironhack.userservice.enums;
 
-public enum Status {
+public enum StatusUser {
     VALIDATED, REJECTED, PENDING
 }

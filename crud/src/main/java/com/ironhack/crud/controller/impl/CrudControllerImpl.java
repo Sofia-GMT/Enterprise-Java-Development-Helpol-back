@@ -17,18 +17,9 @@ import java.util.Optional;
 public class CrudControllerImpl implements CrudController {
 
     @Autowired
-    private OrderServiceClient orderServiceClient;
-
-    @Autowired
-    private PrimersServiceClient primersServiceClient;
-
-    @Autowired
-    private UserServiceClient userServiceClient;
-
-    @Autowired
     private CrudService crudService;
 
-    // Generate an order, calculating price
+    // Generate an order, calculating the price
 
     @PostMapping("/crud/{userId}")
     @ResponseStatus(HttpStatus.CREATED)

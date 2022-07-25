@@ -10,5 +10,5 @@ public interface UserController {
     StatusDto getStatus(Integer id);
     User store( User user);
     void delete(Integer id);
-    void updateStatus(Integer id, StatusDto status);
+    void updateStatusUser(Integer id, StatusDto status);
 }

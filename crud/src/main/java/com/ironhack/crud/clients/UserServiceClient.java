@@ -1,12 +1,9 @@
 package com.ironhack.crud.clients;
 
-import com.ironhack.crud.controller.dto.StatusDto;
+import com.ironhack.crud.controller.dto.StatusUserDto;
 import com.ironhack.crud.models.User;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,17 +14,17 @@ public interface UserServiceClient {
     List<User> findAll();
 
     @GetMapping("/users/{id}")
-    User findById( Integer id);
+    User findById( @PathVariable Integer id);
 
     @GetMapping("/users-status/{id}")
-    StatusDto getStatus(Integer id);
+    StatusUserDto getStatus(@PathVariable Integer id);
 
     @PostMapping("/users")
-    User store( User user);
+    User store(@RequestBody User user);
 
     @DeleteMapping("/users/{id}")
-    void delete(Integer id);
+    void delete(@PathVariable Integer id);
 
     @PatchMapping("/users/{id}/status")
-    void updateStatus(Integer id, StatusDto status);
+    void updateStatusUser(@PathVariable Integer id, @RequestBody StatusUserDto status);
 }

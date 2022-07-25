@@ -1,9 +1,9 @@
 package com.ironhack.crud.controller.dto;
 
-public class StatusDto {
+public class StatusUserDto {
     private String status;
 
-    public StatusDto() {
+    public StatusUserDto() {
     }
 
     public String getStatus() {

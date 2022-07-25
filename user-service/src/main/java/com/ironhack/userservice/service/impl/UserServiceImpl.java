@@ -1,7 +1,7 @@
 package com.ironhack.userservice.service.impl;
 
 import com.ironhack.userservice.controller.dto.StatusDto;
-import com.ironhack.userservice.enums.Status;
+import com.ironhack.userservice.enums.StatusUser;
 import com.ironhack.userservice.model.User;
 import com.ironhack.userservice.repository.UserRepository;
 import com.ironhack.userservice.service.interfaces.UserService;
@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService {
         }
 
         // We check if the new status is different
-        Status newStatus = Status.valueOf( status.getStatus().toUpperCase() );
-        if (newStatus == optionalUser.get().getStatus()){
+        StatusUser newStatusUser = StatusUser.valueOf( status.getStatus().toUpperCase() );
+        if (newStatusUser == optionalUser.get().getStatus()){
             throw new ResponseStatusException( HttpStatus.UNPROCESSABLE_ENTITY, "The user already has that status");
         }
 
-        optionalUser.get().setStatus( newStatus );
+        optionalUser.get().setStatus( newStatusUser );
         userRepository.save( optionalUser.get() );
 
     }

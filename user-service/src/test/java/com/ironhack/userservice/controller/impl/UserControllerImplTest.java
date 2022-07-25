@@ -2,7 +2,7 @@ package com.ironhack.userservice.controller.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ironhack.userservice.controller.dto.StatusDto;
-import com.ironhack.userservice.enums.Status;
+import com.ironhack.userservice.enums.StatusUser;
 import com.ironhack.userservice.model.User;
 import com.ironhack.userservice.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -117,6 +116,7 @@ class UserControllerImplTest {
                 .andExpect( status().isNoContent() )
                 .andReturn();
 
-        assertEquals( Status.VALIDATED, user1.getStatus());
+        System.out.println("Id user 1: "+user1.getId());
+        assertEquals( StatusUser.VALIDATED, user1.getStatus());
     }
 }

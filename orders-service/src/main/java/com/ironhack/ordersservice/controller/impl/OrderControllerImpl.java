@@ -1,6 +1,6 @@
 package com.ironhack.ordersservice.controller.impl;
 
-import com.ironhack.ordersservice.controller.dto.StatusDto;
+import com.ironhack.ordersservice.controller.dto.StatusOrderDto;
 import com.ironhack.ordersservice.controller.interfaces.OrderController;
 import com.ironhack.ordersservice.enums.StatusOrder;
 import com.ironhack.ordersservice.model.Order;
@@ -48,8 +48,8 @@ public class OrderControllerImpl implements OrderController {
 
     @PatchMapping("/orders/{id}/status") // Update status
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateStatus(@PathVariable Integer id,
-    @RequestBody StatusDto status) {
+    public void updateStatusOrder(@PathVariable Integer id,
+    @RequestBody StatusOrderDto status) {
         orderService.updateStatus(id, status) ;
     }
 }
