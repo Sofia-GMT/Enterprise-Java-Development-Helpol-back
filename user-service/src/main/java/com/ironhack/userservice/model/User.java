@@ -17,7 +17,7 @@ public class User {
 
     private Integer idInstitution;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StatusUser statusUser;
 
 
