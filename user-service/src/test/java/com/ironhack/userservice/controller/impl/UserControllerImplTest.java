@@ -36,8 +36,8 @@ class UserControllerImplTest {
 
     @BeforeEach
     void setUp() {
-        user1 = new User( "Daniel González", 236 );
-        user2 = new User( "Andrea Jiménez", 562 );
+        user1 = new User( "Daniel González", 236, "000" );
+        user2 = new User( "Andrea Jiménez", 562, "125" );
         userRepository.saveAll( List.of(user1, user2) );
     }
 
@@ -77,7 +77,7 @@ class UserControllerImplTest {
 
     @Test
     void store() throws Exception {
-        User user3 = new User( "Laura Pérez", 562 );
+        User user3 = new User( "Laura Pérez", 562, "1234" );
         String body = objectMapper.writeValueAsString( user3 );
 
         MvcResult mvcResult = mockMvc.perform(

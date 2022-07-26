@@ -13,17 +13,36 @@ public class User {
 
     private String name;
 
-    private Integer IdInstitution;
+    private String password;
+
+    private Integer idInstitution;
 
     @Enumerated
     private StatusUser statusUser;
 
 
-    public User(String name, int idInstitution) {
+    public User(String name, int idInstitution, String password) {
         this.name = name;
-        IdInstitution = idInstitution;
+        this.idInstitution = idInstitution;
+        this.password=password;
         this.statusUser = StatusUser.PENDING;
         // by default, each time a user is created the status is "pending validation"
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public StatusUser getStatusUser() {
+        return statusUser;
+    }
+
+    public void setStatusUser(StatusUser statusUser) {
+        this.statusUser = statusUser;
     }
 
     public User(){}
@@ -45,11 +64,11 @@ public class User {
     }
 
     public Integer getIdInstitution() {
-        return IdInstitution;
+        return idInstitution;
     }
 
     public void setIdInstitution(Integer idInstitution) {
-        IdInstitution = idInstitution;
+        this.idInstitution = idInstitution;
     }
 
     public StatusUser getStatus() {
