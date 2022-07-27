@@ -10,6 +10,5 @@ public interface CrudService {
 
     Order createAnOrderFromInterface(Integer userId,
                                      Optional<Integer> optionalPrimerId,
-                                     Optional<Integer> optionalConcentration,
-                                     Primers primersWithoutId);
+                                     Optional<Integer> optionalConcentration);
 }

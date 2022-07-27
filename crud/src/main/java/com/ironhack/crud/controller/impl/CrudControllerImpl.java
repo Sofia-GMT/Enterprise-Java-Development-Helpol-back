@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class CrudControllerImpl implements CrudController {
 
     @Autowired
@@ -25,9 +26,8 @@ public class CrudControllerImpl implements CrudController {
     @ResponseStatus(HttpStatus.CREATED)
     public Order createAnOrderFromInterface(@PathVariable Integer userId,
                                             @RequestParam Optional<Integer> optionalPrimerId,
-                                            @RequestParam Optional<Integer> optionalConcentration,
-                                            @RequestBody Primers primersWithoutId){
+                                            @RequestParam Optional<Integer> optionalConcentration){
         return crudService.createAnOrderFromInterface( userId, optionalPrimerId,
-                optionalConcentration, primersWithoutId );
+                optionalConcentration);
     }
 }

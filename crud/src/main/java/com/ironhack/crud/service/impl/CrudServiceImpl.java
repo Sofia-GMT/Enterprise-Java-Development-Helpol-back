@@ -37,8 +37,7 @@ public class CrudServiceImpl implements CrudService {
     @CircuitBreaker(name = "createAnOrderFromInterface", fallbackMethod = "createAnOrderFromInterfaceFallback")
     public Order createAnOrderFromInterface(Integer userId,
                                             Optional<Integer> optionalPrimerId,
-                                            Optional<Integer> optionalConcentration,
-                                            Primers primersWithoutId) {
+                                            Optional<Integer> optionalConcentration) {
 
 
         // WE CHECK IF THE USER IS REGISTERED
@@ -52,17 +51,14 @@ public class CrudServiceImpl implements CrudService {
 
         Order order = null; // this is what we will return later
 
-        Primers primers;
+        Primers primers = null;
 
         // WE CHECK IF THE PRIMERS ARE STORED IN OUR DATABASE
 
         if (optionalPrimerId.isPresent()) {
             // if the primers are already in the database, we retrieve them with findById
             primers = primersServiceClient.findById( optionalPrimerId.get() );
-        } else {
-            // otherwise, we store them in the database
-            primers = primersServiceClient.store( primersWithoutId );
-        }
+        } 
 
         // WE CALCULATE PRICE
 
