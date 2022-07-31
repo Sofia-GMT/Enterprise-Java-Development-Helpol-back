@@ -1,13 +1,20 @@
 |**Proyecto final del curso de Ironhack Enterprise-Java-Development**|
 |---|
 |**Autora:** Sofía González|
-|**Título del proyecto:** Helpol|
+|**Título del proyecto:** Helpol (Help + polymerase)|
 |**Objetivo de la aplicación:** registrar pedidos de primers|
 |**Enlace al repositorio con el frontend:** https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-front.git |
 
 ## 1. Introducción teórica
-### 1.1. ¿Qué es un primer? ¿Para qué sirven?
-### 1.2. Motivación para realizar el proyecto
+### ¿Qué es un primer? ¿Para qué sirven?
+
+De forma simplificada, los primers son moléculas de DNA formados por la concatenación de unidades llamas nucleótidos. A nivel químico, estos nucleótidos se diferencian por las bases nitrogenadas, distinguiéndose cuatro tipos principales identificables por las letras A, T, C y G.
+Por tanto, desde un punto de vista computacional, podemos representar a los nucleótidos como cadenas de estos cuatro caracteres.
+
+In molecular biology, a class of proteins called polymerases are frequently used. These are responsible for extending nucleotide chains, and at the beginning of this elongation they need to use primers.
+
+En biología molecular se utilizan frecuentemente unas proteínas llamadas polimerasas, las cuales se encargan de elongar cadenas de nucleótidos a partir de estos primers. El uso de estas proteínas es fundamental para poder realizar técnicas como la retrotranscripción, la PCR o la concatenación de ambas, es decir, la RT-PCR que se ha mencionado frecuentemente en los medios de comunicación por utilizarse como 
+técnica de diagnóstico para la infección por SARS-CoV-2.
 
 ## 2. Estructura de la aplicación
 ### 2.1. Esquema de los microservicios
