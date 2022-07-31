@@ -110,10 +110,12 @@ SELECT * FROM user;
 Empezando por el eureka-server, hay que correr cada subproyecto para que funcionen todos los microservicios. 
 Para ello hay que ejecutar la siguiente línea de código.
 ```
+# Abriendo una terminal en la ubicación del microservicio
 spring-boot:run
 ```
 ### 3.2. Para el frontend
 ```
+# Abriendo una terminal en la ubicación del proyecto de Angular
 npm install
 ng serve
 ```
