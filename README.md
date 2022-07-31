@@ -17,7 +17,10 @@ En biología molecular se utilizan frecuentemente unas proteínas llamadas polim
 técnica de diagnóstico para la infección por SARS-CoV-2.
 
 ## 2. Estructura de la aplicación
+
 ### 2.1. Esquema de los microservicios
+![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/c00c330e10b12f784aad41ef560eee810ab014b8/estructura-microservicios.jpg)
+
 ### 2.2. Diagrama de clases
 ### 2.3. Diagrama de casos de uso
 
