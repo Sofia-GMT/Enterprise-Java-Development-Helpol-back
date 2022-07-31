@@ -127,4 +127,6 @@ npm install
 ng serve
 ```
 
-## Nota adicional
+## 4. Mejoras para futuro
+
+## 5. Nota adicional
