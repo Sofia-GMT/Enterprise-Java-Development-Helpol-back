@@ -22,12 +22,9 @@ public class CrudControllerImpl implements CrudController {
 
     // Generate an order, calculating the price
 
-    @PostMapping("/crud/{userId}")
+    @PostMapping("/crud")
     @ResponseStatus(HttpStatus.CREATED)
-    public Order createAnOrderFromInterface(@PathVariable Integer userId,
-                                            @RequestParam Optional<Integer> optionalPrimerId,
-                                            @RequestParam Optional<Integer> optionalConcentration){
-        return crudService.createAnOrderFromInterface( userId, optionalPrimerId,
-                optionalConcentration);
+    public Order createAnOrderFromInterface(@RequestBody Order orderWithoutPrice){
+        return crudService.createAnOrderFromInterface(orderWithoutPrice);
     }
 }

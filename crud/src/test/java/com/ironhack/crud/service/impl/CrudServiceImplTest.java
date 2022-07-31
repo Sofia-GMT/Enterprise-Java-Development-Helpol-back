@@ -55,8 +55,8 @@ class CrudServiceImplTest {
         crudService = new CrudServiceImpl();
         primers1=new Primers("GATA3", "AAAATTTTTTTTTCG", "TCCCCCCCCGAA");
         mockPrimer = new Primers("MYC", "AAAAAAACCCCCCCCGTGTGT","CCCCCCCCGGGGGTA");
-        mockOrder = new Order(254, 235, new BigDecimal( 14.3 ));
-        mockUser= new User("userName", 99);
+        mockOrder = new Order(254, 235,25);
+        mockUser= new User("userName", 99, "password");
     }
 
     @AfterEach
@@ -92,7 +92,7 @@ class CrudServiceImplTest {
     void calculatePrice_WithConcentration25() {
         BigDecimal price = new BigDecimal( (15+12)*0.53)
                 .setScale( 2, RoundingMode.HALF_UP ); // 14.31 USD
-        assertEquals( price, crudService.calculatePrice(Optional.of( 25 ),primers1));
+        assertEquals( price, crudService.calculatePrice( mockOrder ,primers1));
 
     }
 
@@ -100,22 +100,16 @@ class CrudServiceImplTest {
     void calculatePrice_WithConcentration100() {
         BigDecimal price = new BigDecimal( (15+12)*1.05)
                 .setScale( 2, RoundingMode.HALF_UP ); // 28.35 USD
-        assertEquals( price, crudService.calculatePrice(Optional.of( 100 ),primers1));
-
+        mockOrder.setConcentration( 100 );
+        assertEquals( price, crudService.calculatePrice(mockOrder ,primers1));
     }
 
     @Test
     void calculatePrice_WithConcentration250() {
         BigDecimal price = new BigDecimal( (15+12)*1.88)
                 .setScale( 2, RoundingMode.HALF_UP ); // 50.76 USD
-        assertEquals( price, crudService.calculatePrice(Optional.of( 250 ),primers1));
+        mockOrder.setConcentration( 250 );
+        assertEquals( price, crudService.calculatePrice(mockOrder ,primers1));
 
-    }
-
-    @Test
-    void calculatePrice_WithoutConcentration() {
-        BigDecimal price = new BigDecimal( (15+12)*0.53)
-                .setScale( 2, RoundingMode.HALF_UP ); // 14.31 USD
-        assertEquals( price, crudService.calculatePrice( Optional.empty(),primers1));
     }
 }

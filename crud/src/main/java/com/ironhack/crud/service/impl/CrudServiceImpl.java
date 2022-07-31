@@ -34,82 +34,73 @@ public class CrudServiceImpl implements CrudService {
     private final Logger logger = LoggerFactory.getLogger( CrudControllerImpl.class);
 
     @Override
-    @CircuitBreaker(name = "createAnOrderFromInterface", fallbackMethod = "createAnOrderFromInterfaceFallback")
-    public Order createAnOrderFromInterface(Integer userId,
-                                            Optional<Integer> optionalPrimerId,
-                                            Optional<Integer> optionalConcentration) {
+    //@CircuitBreaker(name = "createAnOrderFromInterface", fallbackMethod = "createAnOrderFromInterfaceFallback")
+    public Order createAnOrderFromInterface(Order orderWithoutPrice) {
 
 
-        // WE CHECK IF THE USER IS REGISTERED
 
-        try {
-            User user = userServiceClient.findById( userId );
-        } catch (
-                ResponseStatusException e) {
-            logger.error(e.getMessage());
-        } // If the user is in our database then we can continue with the order
-
-        Order order = null; // this is what we will return later
+        // WE CHECK IF THE USER AND THE PRIMERS ARE STORED IN THE SYSTEM
 
         Primers primers = null;
+        User user = null;
 
-        // WE CHECK IF THE PRIMERS ARE STORED IN OUR DATABASE
+        try {
+            user = userServiceClient.findById( orderWithoutPrice.getUserId() );
+            primers = primersServiceClient.findById( orderWithoutPrice.getPrimersId() );
 
-        if (optionalPrimerId.isPresent()) {
-            // if the primers are already in the database, we retrieve them with findById
-            primers = primersServiceClient.findById( optionalPrimerId.get() );
-        } 
+        } catch (ResponseStatusException e) {
+            logger.error(e.getMessage());
+        }
 
         // WE CALCULATE PRICE
 
-        BigDecimal price = calculatePrice( optionalConcentration, primers );
+        BigDecimal price = calculatePrice( orderWithoutPrice, primers );
 
         // WE CREATE AN ORDER
-        order = orderServiceClient.store(
-                    new Order( userId, primers.getId(), price ) );
-        return order;
+        Order newOrder = orderServiceClient.store(
+                    new Order( user.getId(), primers.getId(), price, orderWithoutPrice.getConcentration())
+        );
+        return newOrder;
     }
+
+
+
 
     public Order createAnOrderFromInterfaceFallback(Exception e) {
         logger.error( e.getMessage() );
-        return null;
+        return new Order(); // returns an empty order
     }
 
-    public BigDecimal calculatePrice(Optional<Integer> optionalConcentration, Primers primers){
 
-        BigDecimal price; // this is what we are going to return
 
-        if (optionalConcentration.isPresent()) { // if the concentration is present
 
-            BigDecimal pricePerNucleotide = null;
 
-            switch (optionalConcentration.get()) {
-                case 25:
-                    pricePerNucleotide = new BigDecimal( 0.53 );
-                    break;
-                case 100:
-                    pricePerNucleotide = new BigDecimal( 1.05 );
-                    break;
-                case 250:
-                    pricePerNucleotide = new BigDecimal( 1.88 );
-                    break;
-            }
 
-            // we count the total number of nucleotides and then multiply by
-            // the price per nucleotide
 
-            price = new BigDecimal(
-                    primers.getForwardSequence().length()
-                            + primers.getReverseSequence().length() )
-                    .multiply( pricePerNucleotide );
+    public BigDecimal calculatePrice(Order orderWithoutPrice, Primers primers){
 
-        } else { // if the user did not indicate a concentration,
-            // the default concentration is 25nmol
-            price = new BigDecimal(
-                    primers.getForwardSequence().length()
-                            + primers.getReverseSequence().length() )
-                    .multiply( BigDecimal.valueOf( 0.53 ) );
+        BigDecimal pricePerNucleotide = null;
+
+
+        switch (orderWithoutPrice.getConcentration()) {
+            case 25:
+                pricePerNucleotide = new BigDecimal( 0.53 );
+                break;
+            case 100:
+                pricePerNucleotide = new BigDecimal( 1.05 );
+                break;
+            case 250:
+                pricePerNucleotide = new BigDecimal( 1.88 );
+                break;
         }
+
+        // we count the total number of nucleotides and then multiply by
+        // the price per nucleotide
+
+        BigDecimal price = new BigDecimal(
+            primers.getForwardSequence().length()
+                    + primers.getReverseSequence().length() )
+            .multiply( pricePerNucleotide );
 
         return price.setScale( 2, RoundingMode.HALF_UP );
     }

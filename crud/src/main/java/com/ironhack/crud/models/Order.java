@@ -15,25 +15,41 @@ public class Order {
 
     private BigDecimal price;
 
+    private Integer concentration;
 
     private StatusOrder statusOrder;
 
     public Order(){}
 
-    public Order(Integer userId, Integer primersId, BigDecimal price) {
+    public Order(Integer userId, Integer primersId, Integer concentration) {
+        this.userId = userId;
+        this.primersId = primersId;
+        this.concentration = concentration;
+    }
+
+    public Order(Integer userId, Integer primersId, BigDecimal price, Integer concentration) {
         this.userId = userId;
         this.primersId = primersId;
         this.price = price;
+        this.concentration=concentration;
         this.statusOrder = StatusOrder.PROCESSED;
         // by default, each time an order is created the status is "processed"
         // and only changes to delivered when the scientist receives the primers
     }
 
-    public StatusOrder getStatus() {
+    public Integer getConcentration() {
+        return concentration;
+    }
+
+    public void setConcentration(Integer concentration) {
+        this.concentration = concentration;
+    }
+
+    public StatusOrder getStatusOrder() {
         return statusOrder;
     }
 
-    public void setStatus(StatusOrder statusOrder) {
+    public void setStatusOrder(StatusOrder statusOrder) {
         this.statusOrder = statusOrder;
     }
 

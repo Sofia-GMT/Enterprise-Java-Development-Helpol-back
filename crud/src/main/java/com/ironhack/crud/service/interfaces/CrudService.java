@@ -8,7 +8,5 @@ import java.util.Optional;
 public interface CrudService {
 
 
-    Order createAnOrderFromInterface(Integer userId,
-                                     Optional<Integer> optionalPrimerId,
-                                     Optional<Integer> optionalConcentration);
+    Order createAnOrderFromInterface(Order orderWithoutPrice);
 }

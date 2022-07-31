@@ -102,7 +102,7 @@ class UserControllerImplTest {
     }
 
     @Test
-    void differentStatus() throws Exception{ //AQUÍ NO SALE PERO SÍ EN EL POSTMAN
+    void differentStatus() throws Exception{
         StatusDto statusDto = new StatusDto();
         statusDto.setStatus( "VALIDATED" );
 

@@ -96,7 +96,7 @@ class OrderControllerImplTest {
     }
 
     @Test
-    void updateNewStatus() throws Exception { //AQUÍ NO SALE PERO SÍ EN EL POSTMAN
+    void updateNewStatus() throws Exception {
 
         StatusOrderDto statusOrderDto = new StatusOrderDto();
         statusOrderDto.setStatus( "DELIVERED" );
