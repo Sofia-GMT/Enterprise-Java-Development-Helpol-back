@@ -22,7 +22,12 @@ técnica de diagnóstico para la infección por SARS-CoV-2.
 ![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/c00c330e10b12f784aad41ef560eee810ab014b8/estructura-microservicios.jpg)
 
 ### 2.2. Diagrama de clases
+
+![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/0abeeef9912ab9ceb05dbb47f7669de71dde2766/final-case.jpg)
+
 ### 2.3. Diagrama de casos de uso
+
+![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/0abeeef9912ab9ceb05dbb47f7669de71dde2766/final-case.jpg)
 
 ## 3. Pasos para correr la aplicación
 
