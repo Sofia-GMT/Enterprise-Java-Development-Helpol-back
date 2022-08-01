@@ -155,4 +155,4 @@ ng serve
 El sistema de pedidos, las bases de datos y la calculadora funcionan. Para el futuro se desea implementar un sistema de seguimiento del pedido y otro sistema que envíe a las instuciones un correo para que puedan validar más fácilmente a los usuarios.
 
 ## 5. Apunte final
-Este proyecto se ha realizado en un intervalo de cinco d
+Este proyecto se ha realizado en un intervalo de cinco días, gracias por su comprensión.
