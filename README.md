@@ -32,7 +32,7 @@ transfiere la información al order-service para que guarde el pedido en su base
 
 Se distinguen dos relaciones ONE TO MANY, estándo en el lado MANY la entidad ORDER, mientras que en el ONE están User y Primers.
 Esto se debe a que un pedido (order) solo puede pertenecer a un usuario (userId) y solo puede contener un par de primers (primersId),
-mientras que un usuario puede realizar varios pedidos y una pareja de primers puede estar solicitada en varios pedidos.
+mientras que un usuario puede realizar varios pedidos o ninguno, y una pareja de primers de la base de datos puede estar solicitada en varios pedidos o en ninguno.
 
 ### 2.3. Diagrama de casos de uso
 
