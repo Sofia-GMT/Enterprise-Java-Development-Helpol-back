@@ -32,7 +32,7 @@ transfiere la información al order-service para que guarde el pedido en su base
 
 Se distinguen dos relaciones ONE TO MANY, estándo en el lado MANY la entidad ORDER, mientras que en el ONE están User y Primers.
 Esto se debe a que un pedido (order) solo puede pertenecer a un usuario (userId) y solo puede contener un par de primers (primersId),
-mientras que un usuario puede realizar varios pedidos y una pareja de primers puede estár solicitada en varios pedidos.
+mientras que un usuario puede realizar varios pedidos y una pareja de primers puede estar solicitada en varios pedidos.
 
 ### 2.3. Diagrama de casos de uso
 
@@ -40,7 +40,7 @@ mientras que un usuario puede realizar varios pedidos y una pareja de primers pu
 
 Cuando un profesional accede a la aplicación puede utilizar la calculadora (CG% y temperatura), registrarse o identificarse en el sistema, si ya se había registrado previamente. Una vez identificado puede realizar un pedido con los primers que están en ese momento en la base de datos, o puede añadir un nuevo par de primers en la base de datos.
 
-Cabe destacar que para que un profesional pueda realizar un pedido, es necesario que su usuario haya sido validado por la institución, puesto que es a esta a la que se cobra el coste.
+Cabe destacar que para que un profesional pueda realizar un pedido, es necesario que su usuario haya sido validado por la institución, puesto que es a esta a la que se cobra el coste, ya que es la que financia el proyecto de investigaci
 
 Asímismo, el sistema de seguimiento del pedido es capaz de actualizar el estatus de este, cuyas opciones son procesado, enviado y recibido.
 
@@ -150,6 +150,9 @@ npm install
 ng serve
 ```
 
-## 4. Mejoras para futuro
+## 4. Alcance del proyecto
 
-## 5. Nota adicional
+El sistema de pedidos, las bases de datos y la calculadora funcionan. Para el futuro se desea implementar un sistema de seguimiento del pedido y otro sistema que envíe a las instuciones un correo para que puedan validar más fácilmente a los usuarios.
+
+## 5. Apunte final
+Este proyecto se ha realizado en un intervalo de cinco d
