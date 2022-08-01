@@ -21,13 +21,28 @@ técnica de diagnóstico para la infección por SARS-CoV-2.
 ### 2.1. Esquema de los microservicios
 ![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/199c27190853c61464f2304674e80d61028ffa53/final-microservices.jpg)
 
+El frontend se comunica directamente con los microservicios user-service y primers-service, accediendo a sus bases de datos para poder tener el listado de usuarios registrados y el catálogo de primers respectivamente. 
+
+Para poder realizar un pedido, este pasa a través del crud-service, en el cual se vuelve a validar al usuario y al par de primers seleccionados, depués se calcula el precio del pedido, en función de la longitud de las secuencias y la concentración seleccionada, y finalmente se 
+transfiere la información al order-service para que guarde el pedido en su base de datos.
+
 ### 2.2. Diagrama de clases
 
 ![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/dbb1092986e9db5884c702adcffa172ed2ab908f/final-class.jpg)
 
+Se distinguen dos relaciones ONE TO MANY, estándo en el lado MANY la entidad ORDER, mientras que en el ONE están User y Primers.
+Esto se debe a que un pedido (order) solo puede pertenecer a un usuario (userId) y solo puede contener un par de primers (primersId),
+mientras que un usuario puede realizar varios pedidos y una pareja de primers puede estár solicitada en varios pedidos.
+
 ### 2.3. Diagrama de casos de uso
 
 ![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/0abeeef9912ab9ceb05dbb47f7669de71dde2766/final-case.jpg)
+
+Cuando un profesional accede a la aplicación puede utilizar la calculadora (CG% y temperatura), registrarse o identificarse en el sistema, si ya se había registrado previamente. Una vez identificado puede realizar un pedido con los primers que están en ese momento en la base de datos, o puede añadir un nuevo par de primers en la base de datos.
+
+Cabe destacar que para que un profesional pueda realizar un pedido, es necesario que su usuario haya sido validado por la institución, puesto que es a esta a la que se cobra el coste.
+
+Asímismo, el sistema de seguimiento del pedido es capaz de actualizar el estatus de este, cuyas opciones son procesado, enviado y recibido.
 
 ## 3. Pasos para correr la aplicación
 
