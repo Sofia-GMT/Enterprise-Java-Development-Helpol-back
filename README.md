@@ -23,7 +23,7 @@ técnica de diagnóstico para la infección por SARS-CoV-2.
 
 ### 2.2. Diagrama de clases
 
-![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/0abeeef9912ab9ceb05dbb47f7669de71dde2766/final-case.jpg)
+![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/dbb1092986e9db5884c702adcffa172ed2ab908f/final-class.jpg)
 
 ### 2.3. Diagrama de casos de uso
 
