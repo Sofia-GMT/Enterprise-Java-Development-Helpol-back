@@ -19,7 +19,7 @@ técnica de diagnóstico para la infección por SARS-CoV-2.
 ## 2. Estructura de la aplicación
 
 ### 2.1. Esquema de los microservicios
-![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/c00c330e10b12f784aad41ef560eee810ab014b8/estructura-microservicios.jpg)
+![jpg](https://github.com/Sofia-GMT/Enterprise-Java-Development-Helpol-back/blob/199c27190853c61464f2304674e80d61028ffa53/final-microservices.jpg)
 
 ### 2.2. Diagrama de clases
 
